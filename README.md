@@ -1,8 +1,7 @@
 # EKS Made Easy
-
+https://www.youtube.com/playlist?list=PL8klaCXyIuQ65hRm3pPIRg2OSRjOsXWq2
 
 ## Prerequisites
-
 
 ### Installing AWS CLI
 https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-started.html
@@ -25,9 +24,11 @@ https://eksctl.io/
 https://github.com/weaveworks/eksctl
 
 
-## Through Management Console
+## EKS Cluster through Management Console
 ### Steps
-Create another IAM user with console and programmatic access
+- Create another IAM user with console and programmatic access
+- Configure AWS CLI
+
 ```
 aws iam list-users
 ```
@@ -38,11 +39,13 @@ aws eks update-kubeconfig \
     --name CLUSTER_NAME 
 ```
 
-
-## Through EKSCTL
+## EKS Cluster through EKSCTL
 ```
 eksctl create cluster --name demo --region=ap-south-1 --nodegroup-name demo --nodes 2 --nodes-min 1 --nodes-max 4 --node-volume-size 8 
 ```
 ```
 eksctl delete cluster --name demo --region=ap-south-1
+```
+```
+eksctl get cluster
 ```
