@@ -58,8 +58,7 @@ Example
 ```
 eksctl create cluster --name demo --region=ap-south-1 --nodegroup-name demo --nodes 2 --nodes-min 1 --nodes-max 4 --node-volume-size 8 
 ```
-
-Get Cluster details
+Get list of clusters
 ```
 eksctl get cluster --region ap-south-1
 ```
@@ -69,3 +68,42 @@ eksctl get cluster --region ap-south-1
 eksctl delete cluster --name demo --region=ap-south-1
 ```
 
+## Create Control Plane and Node Group seperately
+```
+eksctl create cluster --name=demo --region=ap-south-1 --without-nodegroup 
+```
+Get list of clusters
+```
+eksctl get cluster    
+```
+Create Node Group with IAM policies to access ALB, DNS, ECR, ASG etc 
+```
+eksctl create nodegroup --help
+```
+```
+eksctl create nodegroup --name=demo \
+                       --cluster=demo \
+                       --region=ap-south-1 \
+                       --node-type=t3.medium \
+                       --nodes=2 \
+                       --nodes-min=2 \
+                       --nodes-max=4 \
+                       --node-volume-size=8 \
+                       --ssh-access \
+                       --ssh-public-key=kube-demo \
+                       --managed \
+                       --asg-access \
+                       --external-dns-access \
+                       --full-ecr-access \
+                       --appmesh-access \
+                       --alb-ingress-access 
+```
+```
+eksctl get cluster
+eksctl get nodegroup --cluster=demo
+```
+Explore the cluster
+```
+kubectl get nodes 
+kubectl get po -A
+```
