@@ -6,6 +6,8 @@ https://www.youtube.com/playlist?list=PL8klaCXyIuQ65hRm3pPIRg2OSRjOsXWq2
 ### Installing AWS CLI
 https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-started.html
 https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-quickstart.html
+https://docs.aws.amazon.com/cli/latest/userguide/cli-services-ec2-instances.html
+https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-quickstart.html
 
 ```
 aws --version
@@ -39,13 +41,31 @@ aws eks update-kubeconfig \
     --name CLUSTER_NAME 
 ```
 
-## EKS Cluster through EKSCTL
+## Create EKS Cluster through EKSCTL
+Syntax
+```
+eksctl create cluster --name cluster-name  \
+--region region-name \
+--version 1.23 \
+--nodegroup-name test \
+--node-type instance-type \
+--node-volume-size <GB> \
+--nodes-min 2 \
+--nodes-max 2 \ 
+--zones <AZ1>,<AZ2>
+```
+Example
 ```
 eksctl create cluster --name demo --region=ap-south-1 --nodegroup-name demo --nodes 2 --nodes-min 1 --nodes-max 4 --node-volume-size 8 
 ```
+
+Get Cluster details
+```
+eksctl get cluster --region ap-south-1
+```
+
+## Delete EKS Cluster through EKSCTL
 ```
 eksctl delete cluster --name demo --region=ap-south-1
 ```
-```
-eksctl get cluster
-```
+
