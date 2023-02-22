@@ -73,6 +73,9 @@ eksctl create cluster --name=demo --region=ap-south-1 --without-nodegroup
 
 # Get list of clusters
 eksctl get cluster    
+
+# Delete the cluster
+eksctl delete cluster demo --region=ap-south-1
 ```
 
 ### Create Node Group with IAM policies to access ALB, DNS, ECR, ASG etc. You should first create a keypair(RSA, .pem) to be used for SSH access to the worker nodes
@@ -92,7 +95,7 @@ eksctl create nodegroup --name=demo \
                        --nodes-max=4 \
                        --node-volume-size=8 \
                        --ssh-access \
-                       --ssh-public-key=eksdemo \
+                       --ssh-public-key=ekstestpair \
                        --asg-access \
                        --external-dns-access \
                        --full-ecr-access \
